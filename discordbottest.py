@@ -54,31 +54,31 @@ async def on_ready():
 
 @client.command()
 async def badpost(*args):
-    shitPostBot.post()
+    await shitPostBot.post()
 
 @client.command()
 async def post(*args):
-    shitPostBot.post('me_irl+prequelmemes+surrealmemes+dankmemes+deepfriedmemes+bonehurtingjuice+youdontsurf+wheredidthesodago', 100, 'This bot is made of hot noods I found on the floor')
+    await shitPostBot.post('me_irl+prequelmemes+surrealmemes+dankmemes+deepfriedmemes+bonehurtingjuice+youdontsurf+wheredidthesodago', 100, 'This bot is made of hot noods I found on the floor')
 
 @client.command()
 async def shitpost(*args):
-    shitPostBot.post('shittyrainbow6', 50, 'This bot is made of broken hitboxes')
+    await shitPostBot.post('shittyrainbow6', 50, 'This bot is made of broken hitboxes')
 
 @client.command()
 async def pullup(*args):
-    shitPostBot.post('wackytictacs+bertstrips+hmmm', 25, 'This bot is made of discarded dreams. Drink them, for they are yours.')
+    await shitPostBot.post('wackytictacs+bertstrips+hmmm', 25, 'This bot is made of discarded dreams. Drink them, for they are yours.')
 
 @client.command()
 async def porn(*args):
-    shitPostBot.post('cablemanagement+mechanical_keyboards+serverporn', 50, 'This bot is made of pure human nut')
+    await shitPostBot.post('cablemanagement+mechanical_keyboards+serverporn', 50, 'This bot is made of pure human nut')
 
 @client.command()
 async def saveme(*args):
-    shitPostBot.post('wholesomememes+rarepuppers+awww', 50, "This bot is made of love")
+    await shitPostBot.post('wholesomememes+rarepuppers+awww', 50, "This bot is made of love")
 
 @client.command()
 async def zalgo(*args):
-    shitPostBot.post('creepy', 25, 'Guardian, when you stare at the void... does it stare back?')
+    await shitPostBot.post('creepy', 25, 'Guardian, when you stare at the void... does it stare back?')
             
 
 @client.command()
@@ -99,9 +99,9 @@ async def whatthejediwonttellyou(*args):
 
 
 
-#@client.command()
-#async def help(*args):
-#    await client.say("Fuck you :eggplant: :fork_and_knife: :yum: :sweat_drops:")
+@client.command()
+async def help(*args):
+    await client.say("Fuck you :eggplant: :fork_and_knife: :yum: :sweat_drops:")
 
 
 client.run(config['discord_token'])
