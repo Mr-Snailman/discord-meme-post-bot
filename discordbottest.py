@@ -100,7 +100,7 @@ async def whatthejediwonttellyou(*args):
 
 
 @client.command()
-async def help(*args):
+async def wut(*args):
     await client.say("Fuck you :eggplant: :fork_and_knife: :yum: :sweat_drops:")
 
 
