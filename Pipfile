@@ -1,0 +1,20 @@
+[[source]]
+
+verify_ssl = true
+url = "https://pypi.python.org/simple"
+name = "pypi"
+
+
+[packages]
+
+"discord.py" = "*"
+praw = "*"
+
+
+[requires]
+
+python_version = "3"
+
+
+[dev-packages]
+
