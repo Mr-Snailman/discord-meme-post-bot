@@ -6,12 +6,15 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 import java.util.stream.Collectors;
 
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 import net.dv8tion.jda.core.entities.MessageChannel;
 import org.springframework.util.Assert;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Handles calling the command factory to resolve
@@ -19,15 +22,15 @@ import org.springframework.util.Assert;
  */
 public class CommandListener extends ListenerAdapter {
 
+  private static final Logger LOG = LoggerFactory.getLogger(CommandListener.class);
   private Pattern commandPattern;
   private Map<String, DiscordCommandHandler> handlers;
 
   public CommandListener(String commandRegex, 
       List<DiscordCommandHandler> handlers) {
-    Assert.notNull(commandPrefix);
+    Assert.notNull(commandRegex);
     Assert.notNull(handlers);
-    this.handlers = new HashMap();
-    handlers.stream().collect(
+    this.handlers = handlers.stream().collect(
         Collectors.toMap(DiscordCommandHandler::getName, Function.identity()));
     try {
       this.commandPattern = Pattern.compile(commandRegex);
@@ -39,12 +42,11 @@ public class CommandListener extends ListenerAdapter {
   @Override
   public void onMessageReceived(MessageReceivedEvent event) {
     String content = event.getMessage().getContentRaw();
- Matcher m = p.matcher("aaaaab");
- boolean b = m.matches();
-
-    if (content.equals("!ping")) {
-      MessageChannel channel = event.getChannel();
-      channel.sendMessage("Pong!").queue(); // Important to call .queue() on the RestAction returned by sendMessage(...)
+    if (this.commandPattern.matcher(content).find()) {
+      String command = this.commandPattern.matcher(content).replaceFirst("");
+      if (this.handlers.containsKey(command)) {
+        this.handlers.get(command).process(event);
+      } 
     }
   }
 }
