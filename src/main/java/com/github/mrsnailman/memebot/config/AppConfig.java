@@ -1,5 +1,5 @@
 package com.github.mrsnailman.memebot.config;
-import com.github.mrsnailman.memebot.MyListener;
+import com.github.mrsnailman.memebot.CommandListener;
 
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
@@ -18,7 +18,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class AppConfig {
 
-
+  @Value("${memebot.discord.commandPrefix:!}")
+  private String commandPrefix;
   @Bean
   public RedditClient redditClient(@Value("${memebot.reddit.user}") String username,
       @Value("${memebot.reddit.password}") String password,
@@ -33,6 +34,6 @@ public class AppConfig {
 
   @Bean
   public JDA jda(@Value("${memebot.discord.token}") String token) throws Throwable {
-    return new JDABuilder(AccountType.BOT).setToken(token).addEventListener(new MyListener()).buildBlocking();
+    return new JDABuilder(AccountType.BOT).setToken(token).addEventListener(new CommandListener(this.commandPrefix)).buildBlocking();
   }
 }
